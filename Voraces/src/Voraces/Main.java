@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.Scanner;
 
 /***********************
  *
@@ -18,7 +19,8 @@ import java.util.Random;
  ************************
  */
 public class Main implements Constantes {
-
+	
+	final static Scanner sn = new Scanner(System.in);
 	public static void main(String[] args) throws IOException {
 		ArrayList<Integer> kilosPoblados = new ArrayList<Integer>();
 		ArrayList<Pueblo> pueblos = new ArrayList<Pueblo>();
@@ -28,11 +30,14 @@ public class Main implements Constantes {
 		int pKilos;
 		int rPeso;
 
-		nPoblados = numPoblados;
+		System.out.println("Introduce el numero de poblados: ");
+		nPoblados = sn.nextInt();
 		int[] kilos = new int[nPoblados];
 
 		mPoblados = crearNumeroRandom(nPoblados);
-		pKilos = tampKilos;
+		
+		System.out.println("Introduzca el peso máximo a crear de kilos: ");
+		pKilos = sn.nextInt();
 		kilosRecoger = mPoblados * (pKilos / 2);
 		rPeso = crearNumeroRandom(kilosRecoger);
 		kilos = Vectores.crearVectorRandom(nPoblados, pKilos);
@@ -58,15 +63,16 @@ public class Main implements Constantes {
 	public static void mostrarInicio(int nPoblados, int mPoblados, int rPeso, ArrayList<Integer> kilosPoblados,
 			ArrayList<Pueblo> pueblos) {
 		System.out.println("Total Poblados: " + nPoblados);
-		System.out.println("N�mero m�ximo de poblados a visitar en un d�a: " + mPoblados);
+		System.out.println("Número máximo de poblados a visitar en un día: " + mPoblados);
 		System.out.println("Peso que soporta el trineo: " + rPeso);
 		System.out.println(
 				"-------------------------------------------------------------------------------------------------------------------------");
-
-		System.out.println("Poblados:");
+		int cont = 0;
+		System.out.println("Kilos de los poblados a visitar:");
 		System.out.print("[");
 		for (int i : kilosPoblados) {
-			System.out.print(i + ", ");
+			System.out.print(cont+": "+i + "kg, ");
+			cont++;
 		}
 		System.out.print("]\n");
 		Collections.sort(pueblos, new KilosComparator());
